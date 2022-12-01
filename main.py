@@ -9,6 +9,7 @@ def check_resources(drink):
       print(f"Sorry, there is not enough {ingredient}.")
       return False
 
+
 def coin_payment():
   payment = 0.0
   print("Please insert coins.")
@@ -23,27 +24,28 @@ def coin_payment():
   print(f"You entered : £ {payment}")
   return payment
 
+def process_order(drink):
+  print(f"Please pay : £{DRINKS[drink]['cost']}")
+  check_resources(DRINKS[drink])
+  payment = coin_payment()
+  if payment >= DRINKS[drink]['cost']:
+    print('Payment accepted, thank you.')
+  else :
+    print('Not enough funds to proceed, your money has been returned.')
+
+
 def order_drink():
   while True :
     order = input("What would you like? (espresso/latte/cappuccino) ☕: ")
-    if order == "espresso":
-      print(f"Please pay : £{DRINKS['espresso']['cost']}")
-      check_resources(DRINKS['espresso'])
-      if coin_payment() >= {DRINKS['espresso']['cost']:
-        print('Payment accepted, thank you.')
-      else :
-        print('Not enough funds to proceed, your money has been returned.')
-    elif order == "latte":
-      print("latte")
-      return
-    elif order == "cappuccino":
-      print("cappuccino")
-      return
+    if order not in DRINKS:
+      print('Please enter a valid drink name.')
+    elif order in DRINKS:
+      process_order(order)
     elif order == "off":
       print("Shutting down ...")
       break
     else :
-      return
+      pass
 
 
 if __name__ == '__main__':
